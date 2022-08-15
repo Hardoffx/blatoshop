@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Support{% endblock title %}
+
+
+{% block content %}
+
+<body class="main__body">
+    <!-- Header -->
+	{% include 'include/left_menu.html' %}
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<section class="section__support support">
+	<div class="support__wrapper">
+		<div class="support__title">SUPPORT</div>
+		<div class="support__subtitle">BLATOSPHERA will support you, if your intentions are sincere</div>
+		<div class="support__links">
+			<a href="#" class="support__link">Часто задаваемые вопросы</a>
+			<a href="#" class="support__link">Покупателям</a>
+			<a href="#" class="support__link">Таблица размеров</a>
+			<a href="#" class="support__link">Связаться с нами</a>
+			<a href="#" class="support__link">Политика конфиденциальности</a>
+		</div>
+	</div>
+</section>
+		</div>
+		<!-- Footer -->
+		{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Account{% endblock title %}
+
+
+{% block content %}
+
+<body class="main__body">
+    <!-- Header -->
+    {% include 'include/left_menu.html' %}
+
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<section class="section__account account">
+	<div class="account__wrapper">
+		<div class="account__title">My Account Dashboard
+		</div>
+		<div class="account__block">
+			<div class="account__login login">
+				<div class="account__bigtitle">Вход</div>
+				<form class="account__items">
+					<div class="account__item item-in">
+						<div class="account__item-title item-input-title">Имя пользователя или Email *</div>
+						<input type="text" class="account__input item-input" id="user_account">
+					</div>
+					<div class="account__item item-in">
+						<div class="account__item-title item-input-title">Пароль *</div>
+						<input type="password" class="account__input item-input" id="user_passwod">
+					</div>
+					<div class="account__check">
+						<div class="account__item">
+							<input type="checkbox" class="account__checkbox">
+							<label for="" class='account__checkbox-text'>
+								Запомнить меня
+							</label>
+						</div>
+						<a href="#" class="account__remember account__link">Забыли свой пароль?</a>
+					</div>
+					<button class="account__btn">Войти</button>
+				</form>
+			</div>
+			<div class="account__sing sing">
+				<div class="account__bigtitle">Регистрация</div>
+				<form class="account__items">
+					<div class="account__item item-in">
+						<div class="account__item-title item-input-title">Имя пользователя *</div>
+						<input type="text" class="account__input item-input" id="user_account">
+					</div>
+					<div class="account__item item-in">
+						<div class="account__item-title item-input-title">Email *</div>
+						<input type="text" class="account__input item-input" id="user_email">
+					</div>
+					<div class="account__item item-in">
+						<div class="account__item-title item-input-title">Пароль *</div>
+						<input type="password" class="account__input item-input" id="user_passwod">
+					</div>
+					<div class="account__note">
+						Ваши личные данные будут использоваться для управления доступом к Вашей учетной записи и для других целей, описанных в нашей <a href="#" class="account__link">политика конфиденциальности</a>.
+					</div>
+					<button class="account__btn">Регистрация</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+		</div>
+		<!-- Footer -->
+		{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+
+{% endblock content %}

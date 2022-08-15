@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<body class="main__body">
+    <!-- Header -->
+    {% include 'include/left_menu.html' %}
+
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<!-- main -->
+			<section class="section__main main">
+   <div class="main__wrapper">
+      <div class="main__title">The World is Ours</div>
+
+      <div class="main__block">
+			<!--Slider_1-->
+		  {% for slider in slider %}
+		  <div class="main__head">
+			 <a href="/category/iphone"><img src="{{ slider.image_1.url }}" alt="" class="main__img" /></a>
+		  </div>
+		  {% endfor %}
+			<!--Product_block-->
+	      <div class="main__items">
+
+			  {% for product in product %}
+			  	{% if forloop.counter <= 5 and  forloop.counter < 5 %} <!-- and  forloop.counter < 5 -->
+				 <a href="category/iphone/{{ product.slug }}" class="main__item prod">
+					<div class="prod__img-out">
+					   <img
+						  src="{{ product.image_title.url }}"
+						  alt=""
+						  class="prod__img"
+					   />
+					</div>
+					<div class="prod__text">
+						<div class="prod__title">
+							{{ product.name }}
+						</div>
+						<div class="prod__price">{{ product.price }}₽</div>
+					</div>
+				 </a>
+			  	{% endif %}
+			  {% endfor %}
+	      </div>
+      </div>
+
+
+		<div class="main__block">
+			<!--Slider_2-->
+			{% for slider in slider %}
+			  <div class="main__head">
+				 <img src="{{ slider.image_2.url }}" alt="" class="main__img" />
+			  </div>
+			{% endfor %}
+
+
+	      <div class="main__items">
+
+			  {% for product in product_v %}
+			  	{% if forloop.counter <= 5 and  forloop.counter < 5 %}
+				 <a href="category/top/{{ product.slug }}" class="main__item prod">
+					<div class="prod__img-out">
+					   <img
+						  src="{{ product.image_title.url }}"
+						  alt=""
+						  class="prod__img"
+					   />
+					</div>
+					<div class="prod__text">
+						<div class="prod__title">
+						   {{ product.name }}
+						</div>
+						<div class="prod__price">{{ product.price }}₽</div>
+					</div>
+				 </a>
+			  	{% endif %}
+			  {% endfor %}
+
+	      </div>
+
+
+      </div>
+   </div>
+</section>
+
+		</div>
+
+	<!-- Footer -->
+	{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+
+{% endblock content %}

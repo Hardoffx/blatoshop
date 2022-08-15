@@ -1,0 +1,92 @@
+{% load static mptt_tags category_tag %}
+
+<!-- Header -->
+<header>
+<!-- Navbar -->
+<nav>
+     <div class="navbar">
+            <div class="burger">
+           <span></span>
+        </div>
+        <!--Logo-->
+        <div class="logo"><a href="{% url 'home' %}"><img class="logo__img" src="{% static 'img/logo.jpg' %}" alt="logo"></a></div>
+
+        <!--Left Menu-->
+        <ul class="menu">
+                    <div class="menu__products">
+
+                        {% get_list_category as list_category %}
+                        {% recursetree list_category %}
+                        <div class="menu__item menu__item-angle">
+                            <div class="menu__trigger hover-trigger">
+
+                                <ul ><a class="menu__link" href="{% url 'prod_list' node.slug %}">{{ node.name|safe }}</a>
+
+                                    <div class="menu__item-content-header-out">
+                                        {% if not node.is_leaf_node %}
+                                        <li class="menu__item-content-header">
+                                            {{ children }}
+                                        </li>
+                                        {% endif %}
+                                    </div>
+                                </ul>
+
+                                <img src="img/down_angle.svg" alt="" class="menu__angle">
+                            </div>
+
+<!--                            <div class="menu__item-content accordion__item-content">-->
+<!--                                    <a href="#" class="menu__item-acc">Tops</a>-->
+<!--                                    <a href='#' class="menu__item-acc">Bottoms</a>-->
+<!--                            </div>-->
+                        </div>
+                        {% endrecursetree %}
+
+                    </div>
+
+
+                    <div class="menu__line"><span class="menu__line-span"></span></div>
+
+
+            <div class="menu__items">
+                {% get_system_categories as system_categories %}
+                {% for system_categories in system_categories %}
+                <li class="menu__item"><a href="{{ system_categories.get_absolute_url }}" class="menu__link">{{ system_categories.name }}</a></li>
+                {% endfor %}
+            </div>
+
+
+            </ul>
+            <div href="#" class="cart">
+                <a href="{% url 'cart:cart_detail' %}" class="cart__link">
+                    <img src="{% static 'img/shopping-bag.svg' %}" alt="" class="cart__img"/>
+                    {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                    <span class="cart__count">{{ total_items }}</span>
+                    {% endif %}
+                    {% endwith %}
+                </a>
+
+
+                <div class="cart_mobile">
+                    <div class="cart_mobile__items">
+                        <a href='prod.html' class="cart_mobile__item">
+                            <div class="cart_mobile__img-out">
+                                <img src="img/pic_5381-300x300.jpg" class="cart_mobile__img"/>
+                            </div>
+                            <div class="cart_mobile__text">
+                                <div class="cart_mobile__name">SUPERFLY CAMO "LONG LIVE BLATO" ANORAKH JACKET - M</div>
+                                <div class="cart_mobile__price">1 × 8500</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cart_mobile__full_price">Подытог: 8500₽</div>
+                    <a href="#" class="cart_mobile__btn_link">Просмотр корзины</a>
+                    <a href="#" class="cart_mobile__btn_link">Оформление заказа</a>
+                </div>
+
+            </div>
+        </ul>
+
+     </div>
+</nav>
+</header>

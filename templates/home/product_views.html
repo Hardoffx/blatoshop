@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block content %}
+<body class="main__body">
+    <!-- Header -->
+	{% include 'include/left_menu.html' %}
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<section class="section__product product">
+
+   <div class="product__wrapper">
+      <div class="product__images">
+         <div class="product__img-out">
+            <!--img_1-Big-->
+            <img src="{{ product.image_1.url }}" alt="" class="product__img active" />
+
+            <!--img_1-->  <!-- ? -->
+            <img
+               src="{{ product.image_2.url }}"
+               alt=""
+               class="product__img"
+            />
+
+            <!--img_3-->  <!-- Big -->
+            {#<!--src="{% static 'img/pic_5370-2-scaled.jpg' %}"-->#}
+            {% if product.image_3 %}
+            <img
+               src="{{ product.image_3.url }}"
+               alt=""
+               class="product__img"
+            />
+            {% endif %}
+         </div>
+
+         <div class="product__img-dots">
+            <!--img_1-mini-->
+            <img
+               src="{{ product.image_1.url }}"
+               alt=""
+               class="product__dot active"
+            />
+
+            <!--img_2-mini-->
+            {% if product.image_2 %}
+            <img
+               src="{{ product.image_2.url }}"
+               alt=""
+               class="product__dot"
+            />
+            {% endif %}
+
+            <!--img_3-mini-->
+            {% if product.image_3 %}
+            <img
+               src="{{ product.image_3.url }}"
+               alt=""
+               class="product__dot"
+            />
+            {% endif %}
+         </div>
+
+      </div>
+      <div class="product__info">
+         <div class="product__text">
+            <div class="product__title">
+               {{ product.name }}
+            </div>
+            <div class="product__price">{{ product.price }} ₽</div>
+            <div class="product__spec">
+               <p>
+                  {{ product.description|safe }}
+               </p>
+            </div>
+         </div>
+<!--         <div class="product__select select">-->
+<!--            <div class="select__title">Размер</div>-->
+<!--            <select class="select__select">-->
+<!--               <option value="Выбрать" selected>Выбрать</option>-->
+<!--               <option value="S">S</option>-->
+<!--               <option value="M">M</option>-->
+<!--               <option value="L">L</option>-->
+<!--               <option value="XL">XL</option>-->
+<!--               <option value="XXL">XXL</option>-->
+<!--            </select>-->
+<!--         </div>-->
+         <div class="product__enable enable-green"></div>
+
+         <div class="product__add">
+
+
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+              {{ cart_product_form.quantity }}
+               {% csrf_token %}
+            <button class="product__btn">В корзину</button>
+            </form>
+
+         </div>
+
+      </div>
+   </div>
+
+</section>
+
+		</div>
+		<!-- Footer -->
+		{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+
+
+<script>
+	function tabs(
+   headerSelector,
+   tabSelector,
+   contentSelector,
+   activeClass,
+   display = "flex"
+) {
+   const header = document.querySelector(headerSelector),
+      tab = document.querySelectorAll(tabSelector),
+      content = document.querySelectorAll(contentSelector);
+   function hideTabContent() {
+      content.forEach((item) => {
+         item.style.display = "none";
+      });
+      tab.forEach((item) => {
+         item.classList.remove(activeClass);
+      });
+   }
+   function showTabContent(i = 0) {
+      content[i].style.display = display;
+      tab[i].classList.add(activeClass);
+   }
+   hideTabContent();
+   showTabContent();
+   header.addEventListener("click", (e) => {
+      const target = e.target;
+      if (
+         target.classList.contains(tabSelector.replace(/\./, "")) ||
+         target.parentNode.classList.contains(tabSelector.replace(/\./, ""))
+      ) {
+         tab.forEach((item, i) => {
+            if (target == item || target.parentNode == item) {
+               hideTabContent();
+               showTabContent(i);
+            }
+         });
+      }
+   });
+}
+
+tabs(".product__img-dots", ".product__dot", ".product__img", "active");
+
+</script>
+{% endblock content %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина покупок{% endblock title %}
+
+{% block content %}
+
+   <body class="main__body">
+      <!-- Header -->
+	  {% include 'include/left_menu.html' %}
+
+
+      <!-- Main Page -->
+      <main class="container-main">
+         <div class="main__obl"><section class="section__cart cart-prod">
+	<div class="cart__wrapper">
+		<div class="cart__title">Cart</div>
+		<div class="cart__wrap">
+			<div class="cart__block">
+				<div class="cart__items">
+					<div class="cart__text">
+						<span class="cart__span">Товар</span>
+						<span class="cart__span">Количество</span>
+						<span class="cart__span">Подытог</span>
+					</div>
+
+					{% for item in cart %}
+					{% with product=item.product %}
+					<div class="cart__item cart_prod">
+
+						<div class="cart_prod__left">
+							<div class="cart_prod__img-out">
+								<img src="{% if product.image_title %}{{ product.image_title.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="" class="cart_prod__img">
+							</div>
+							<div href="prod.html" class="cart_prod__link cart_prod-name">{{ product.name }}</div>
+						</div>
+						<div class="cart_prod__right">
+							<div class="cart_prod__counter">
+							<button class="cart_prod__count_btn" id="count-minus">-</button>
+							<div class="cart_prod__count-out"><span class="cart_prod__count">{{ item.quantity }}</span></div>
+							<button class="cart_prod__count_btn" id="count-plus">+</button>
+							</div>
+							<div class="cart_prod__price">{{ item.total_price }}₽</div>
+							
+						</div>
+						<a href="{% url 'cart:cart_remove' product.id %}"><button class="cart_prod__btn" id='1'>
+								<span class="cart_prod__span"></span>
+								<span class="cart_prod__span"></span>
+						</button></a>
+
+					</div>
+
+					{% endwith %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="cart__spec">
+				<div class="cart__deliver">
+					<div class="cart__subtitle">Доставка</div>
+					<a href="#" class="cart__subtitle_link">Рассчитать стоимость доставки</a>
+				</div>
+				<div class="cart__prices">
+					<div class="cart__price_title">Итого</div>
+					<div class="cart__price">{{ cart.get_total_price }}₽</div>
+				</div>
+				<a href="#" class="cart__btn">Оформить заказ</a>
+			</div>
+		</div>
+	</div>
+</section></div>
+         <!-- Footer -->
+         {% include 'include/footer.html' %}
+
+      </main>
+   </body>
+
+   <script>
+      const btns = document.querySelectorAll(".cart_prod__counter");
+		const removeBtns = document.querySelectorAll(".cart_prod__btn");
+		const cartWrapper = document.querySelector('.cart__wrap')
+		const cartItem = document.querySelectorAll('.cart__item')
+		if(cartItem.length == 0){
+			cartWrapper.innerHTML = 'Ваша корзина пока пуста.'
+			cartWrapper.classList.add('empty-cart')
+		}
+      btns.forEach((item) => {
+         const plusBtn = item.childNodes[5]
+      	const minusBtn = item.childNodes[1]
+      	const count = item.childNodes[3].childNodes[0]
+         plusBtn.addEventListener("click", () => {
+            if (Number(count.innerHTML) >= 1) {
+               count.innerHTML = Number(count.innerHTML) + 1;
+            }
+         });
+         minusBtn.addEventListener("click", () => {
+            if (Number(count.innerHTML) == 1) {
+               count.innerHTML = 1;
+            } else {
+               count.innerHTML = Number(count.innerHTML) - 1;
+            }
+         });
+			removeBtns.forEach((btn, i) => {
+				btn.addEventListener('click', ()=>{
+					btn.parentElement.remove()
+					let cartItems = document.querySelectorAll('.cart__item')
+					if(cartItems.length == 0){
+						cartWrapper.innerHTML = 'Ваша корзина пока пуста.'
+						cartWrapper.classList.add('empty-cart')
+					}		
+				})
+			})
+      });
+   </script>
+{% endblock content %}

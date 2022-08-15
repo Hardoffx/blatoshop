@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+<body class="main__body">
+    <!-- Header -->
+	{% include 'include/left_menu.html' %}
+
+
+
+
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<!-- main -->
+			<section class="section__contact contact">
+	<div class="contact__wrapper">
+		<div class="contact__title">CONTACT BLATO</div>
+		<div class="contact__subtitle">Перед тем, как написать письмо, посмотрите нет ли ответа на Ваш вопрос <a href="#" class="zdes_linc_contact">здесь.</a></div>
+
+
+
+<!--		<form id="contactForm" class="contact__item item-in" method="post">-->
+			<form class="contact__inputs" method="post">
+				<div class="contact__item item-in">
+				  {% csrf_token %}
+				  	<div class="contact__item item-in">
+					  <div class="contact__item-title item-input-title">Имя (обязательно) *</div>
+					{{ form.name }}  <!-- as_p -->
+					</div>
+					<div class="contact__item item-in">
+					  <div class="contact__item-title item-input-title">E-mail (обязательно) *</div>
+					{{ form.email }}
+					</div>
+					  <div class="contact__item-title item-input-title">Тема (обязательно) *</div>
+					<div class="contact__item item-in">
+					{{ form.title }}
+					</div>
+					  <div class="contact__item-title item-input-title">Сообщение (обязательно) *</div>
+					<div class="contact__item item-in">
+					{{ form.message }}
+					</div>
+				  </div>
+              <div class="form-group">
+				  <button class="contact__btn">Отправить</button>
+<!--                <input type="submit" value="Отправить заявку" class="btn btn-primary py-3 px-5">-->
+              </div>
+            </form>
+
+
+
+
+<!--		<form class="contact__inputs">-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__item-title item-input-title">Имя (обязательно) *</div>-->
+<!--				<input class="contact__input item-input contact__input-const" id="user_name">-->
+<!--			</div>-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__item-title item-input-title">E-mail (обязательно) *</div>-->
+<!--				<input class="contact__input item-input contact__input-const" id="user_email">-->
+<!--			</div>-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__item-title item-input-title">Телефон</div>-->
+<!--				<input class="contact__input- item-input" id="user__phone">-->
+<!--			</div>-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__item-title item-input-title">Тема (обязательно) *</div>-->
+<!--				<input class="contact__input item-input contact__input-const" id="user_topic">-->
+<!--			</div>-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__item-title item-input-title">Сообщение (обязательно) *</div>-->
+<!--				<textarea class="contact__textarea  item-textarea contact__input-const" name="" id="" cols="30" rows="10"></textarea>-->
+<!--			</div>-->
+<!--			<div class="contact__item item-in">-->
+<!--				<div class="contact__checkbox checkbox">-->
+<!--					<input type="checkbox" class="checkbox__block contact__input-const">-->
+<!--					<label for="" class='checkbox__text'>-->
+<!--						Согласен на обработку персональных данных. <a href="#" class="contact__link"> Политика конфиденциальности</a>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="contact__item">-->
+<!--				<div class="contact__item-title item-input-title item-captcha">Подтвердите, что Вы не робот 23 + 10 = ?</div>-->
+<!--				<input type="text" class="contact__input item-input item-input-captcha  contact__input-const">-->
+<!--				<div class="contact__item-subtitle">введите значение уравнения </div>-->
+<!--			</div>-->
+<!--		</form>-->
+
+<!--		<button class="contact__btn">Отправить</button>-->
+	</div>
+</section>
+		</div>
+		<!-- Footer -->
+		{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+
+<script>
+	const inputs = document.querySelectorAll('.contact__input-const')
+	const btn = document.querySelector('.contact__btn')
+	const textarea = document.querySelector('.contact__textarea')
+	btn.addEventListener('click', ()=>{
+		console.log('adsf')
+		inputs.forEach(item=>{
+			const parent = item.parentNode
+			if(item.value == '' || item.checked == false){
+				parent.classList.add('red-line')
+			}
+		})
+	})
+</script>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ object_list.0.category.name }}{% endblock title %}
+
+{% block content %}
+<body class="main__body">
+    <!-- Header -->
+	{% include 'include/left_menu.html' %}
+
+    <!-- Main Page -->
+    <main class="container-main">
+		<div class="main__obl">
+			<!-- list -->
+			<section class="section__list list">
+	<div class="list__wrapper main__wrapper">
+		<div class="list__title">
+			<a href="prod.html" class="list__link link-main">Blatosphera </a>
+			<span> / </span>
+			<a href="#" class="list__link link-now"> Sweats</a>
+		</div>
+
+		<div class="filter">
+			<div class="filter-trigger">
+				<div class="trigger__text__size">Размер</div>
+				<img src="{% static 'img/down_angle.svg' %}" alt="" class="trigger__ico">
+			</div>
+			<div class="filter-content">
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">S</label>
+				</div>
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">M</label>
+				</div>
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">L</label>
+				</div>
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">XL</label>
+				</div>
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">XXL</label>
+				</div>
+				<div class="filter__size">
+					<input type="checkbox" class="filter__checkbox">
+					<label for="" class="filter__text">XXXL</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="list__items">
+			{# {% url 'prod_list' product.slug %} #}
+
+			{% for product in product %}
+			<a href="{{ product.slug }}" class="list__item prod_list">
+				<div class="prod_list__img-out">
+					<img
+						src="{{ product.image_title.url }}"
+						alt=""
+						class="prod_list__img"
+					/>
+				</div>
+				<div class="prod_list__text">
+					<div class="prod_list__title">
+						{{ product.name }}
+					</div>
+					<div class="prod_list__price">{{ product.price }}₽</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+
+
+	</div>
+</section>
+		</div>
+		<!-- Footer -->
+		{% include 'include/footer.html' %}
+
+	 </main>
+
+</body>
+{% endblock content %}
