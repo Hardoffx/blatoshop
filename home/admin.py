@@ -38,3 +38,5 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(ContactModel)
 admin.site.register(HomeSlider)
 # admin.site.register(SystemCategories)
+
+
