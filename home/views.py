@@ -80,3 +80,7 @@ def account(request):
 
 def support(request):
     return render(request, 'home/support.html')
+
+
+# def checkout(request):
+#     return render(request, 'home/checkout.html')

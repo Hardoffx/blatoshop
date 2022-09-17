@@ -6,6 +6,7 @@ urlpatterns = [
     path('account/', account, name='account'),
     path('contact/', contact, name='contact'),
     path('support/', support, name='support'),
+    # path('checkout/', support, name='checkout'),
 
     path('category/<slug:category_slug>/', ProductList.as_view(), name='prod_list'),
     path('category/<slug:category_slug>/<slug:product_slug>/', ProductDetailView.as_view(), name="product_detail"),

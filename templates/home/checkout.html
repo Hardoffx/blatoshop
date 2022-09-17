@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ object_list.0.category.name }}{% endblock title %}
+
+{% block content %}
+   <body class="main__body">
+      <!-- Header -->
+{% include 'include/left_menu.html' %}
+
+
+      <!-- Main Page -->
+      <main class="container-main">
+         <div class="main__obl"><section class="section__checkout checkout">
+	<div class="checkout__wrapper">
+		<div class="checkout__title">CHECKOUT</div>
+		<div class="checkout__grid">
+			<div class="checkout__details details checkout-block">
+				<div class="details__payment">
+					<h3 class="details__title checkout-title">Детали оплаты</h3>
+					<div class="details__items">
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Имя *</div>
+							<input type="text" class="details__input item-input" id="user_name">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Фамилия *</div>
+							<input type="text" class="details__input item-input" id="user_surname">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Страна/регион *</div>
+							<select type="text" class="details__select item-select" id="user_country">
+								<option value="Russia">Выберите страну/регион...</option>
+							</select>
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Область / район *</div>
+							<select type="text" class="details__select item-select" id="user_area">
+								<option value="Moscow">Выберите парамент...</option>
+							</select>
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Населённый пункт *</div>
+							<input type="text" class="details__input item-input" id="user_city">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Адрес *</div>
+							<input type="text" class="details__input item-input" id="user_address" placeholder="Номер дома и название улицы">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Почтовый индекс *</div>
+							<input type="text" class="details__input item-input" id="user_index">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Телефон *</div>
+							<input type="text" class="details__input item-input" id="user_phone">
+						</div>
+						<div class="details__item item-in">
+							<div class="details__item-title item-input-title">Email *</div>
+							<input type="text" class="details__input item-input" id="user_email">
+						</div>
+					</div>
+					<div class="details__check">
+						<input type="checkbox" class="details__checkbox" id='remember-me'>
+						<label for="" class="details__checkname">Зарегистрировать вас?</label>
+					</div>
+				</div>
+				<div class="details__under">
+					<h3 class="details__title checkout-title">Детали</h3>
+					<div class="details__textarea-out">
+						<div class="details__textarea-title item-input-title">Примечание к заказу (необязательно)</div>
+						<textarea class="details__textarea item-textarea" name="" id="" cols="30" rows="10" placeholder="Примечание к вашему заказу, например, особые пожелания отделу доставки." id='details'></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="chechout__right">
+
+
+				<div class="checkout__order order checkout-block">
+					<div class="order__title checkout-title">Ваш заказ</div>
+					{% for item in cart %}
+					{% with product=item.product %}
+					<div class="order__items">
+						<div class="order__item">
+							<div class="order__prod">{{ product.name }}</div>
+							<div class="order__price_prod">{{ product.price }}₽</div>
+						</div>
+					</div>
+					{% endwith %}
+					{% endfor %}
+					<div class="order__total">
+						<div class="order__subtitle">Итого</div>
+						<div class="order__price">{{ cart.get_total_price }}₽</div>
+					</div>
+				</div>
+
+
+				<div class="checkout__card card checkout-block">
+					<div class="promo__title checkout-title">У вас есть подарочная карта?</div>
+					<div class="card__promo promo">
+						<input class="promo__input" placeholder="Введите свой код" id="promocode">
+						<button class="promo__btn">Применить</button>
+					</div>
+					<div class="card__payment payment">
+						<div class="payment__sber sber">
+							<div class="sber__up">
+								<div class="sber__radio">
+									<input type="radio" class="sber__input" checked>
+									<label class="sber__title">Оплата банковской картой</label>
+								</div>
+								<img src="{% static 'img/sber.png' %}" alt="sber" class="sber__img">
+							</div>
+							<div class="sber__down">Заказ можно оплатить с произвольной банковской карты Visa, Mastercard, Maestro и Мир через платежный шлюз Сбербанка</div>
+						</div>
+						<div class="payment__spec">Ваши личные данные будут использоваться для обработки вашего заказа и для других целей, описанных в нашей <a href="#" class="payment__link">политика конфиденциальности.</a></div>
+						<div class="payment__subtitle">После оформления заказа вы получите письмо на электронную почту</div>
+						<a href="#" class="payment__btn">Подтвердил заказ</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section></div>
+         <!-- Footer -->
+	  {% include 'include/footer.html' %}
+
+</main>
+   </body>
+
+{% endblock content %}

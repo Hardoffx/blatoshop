@@ -20,11 +20,13 @@
             <img src="{{ product.image_1.url }}" alt="" class="product__img active" />
 
             <!--img_1-->  <!-- ? -->
+            {% if product.image_3 %}
             <img
                src="{{ product.image_2.url }}"
                alt=""
                class="product__img"
             />
+            {% endif %}
 
             <!--img_3-->  <!-- Big -->
             {#<!--src="{% static 'img/pic_5370-2-scaled.jpg' %}"-->#}
